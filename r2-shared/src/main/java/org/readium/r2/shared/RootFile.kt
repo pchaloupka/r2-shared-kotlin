@@ -1,5 +1,5 @@
 /*
- * Module: r2-shared-kotlin
+ * Module: r2-shared-kotlin-test
  * Developers: Aferdita Muriqi, Clément Baumann
  *
  * Copyright (c) 2018. Readium Foundation. All rights reserved.
