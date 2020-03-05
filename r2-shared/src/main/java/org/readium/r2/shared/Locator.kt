@@ -85,9 +85,10 @@ class LocatorText(var after: String? = null,
  * @var position: Long - An index in the publication.
  *
  */
-class Locations(var fragment: String? = null,        // 1 = fragment identifier (toc, page lists, landmarks)
-                var progression: Double? = null,     // 2 = bookmarks
-                var position: Long? = null           // 3 = goto page
+class Locations(var fragment: String? = null,         // 1 = fragment identifier (toc, page lists, landmarks)
+                var progression: Double? = null,      // 2 = bookmarks
+                var position: Long? = null,           // 3 = goto page
+                var totalProgression: Double? = null  // 4 = total bookmarks progression
 ) : JSONable, Serializable {
 
     companion object {
@@ -103,12 +104,15 @@ class Locations(var fragment: String? = null,        // 1 = fragment identifier 
             if (json.has("position")) {
                 location.position = json.getLong("position")
             }
+            if (json.has("totalProgression")) {
+                location.totalProgression = json.getDouble("totalProgression")
+            }
 
             return location
         }
 
         fun isEmpty(locations: Locations):Boolean {
-            if (locations.fragment == null && locations.position == null && locations.progression == null) {
+            if (locations.fragment == null && locations.position == null && locations.progression == null && locations.totalProgression == null) {
                 return true
             }
             return false
@@ -128,6 +132,9 @@ class Locations(var fragment: String? = null,        // 1 = fragment identifier 
         position?.let {
             json.putOpt("position", position)
         }
+        totalProgression?.let {
+            json.putOpt("totalProgression", totalProgression)
+        }
 
         return json
     }
@@ -137,6 +144,7 @@ class Locations(var fragment: String? = null,        // 1 = fragment identifier 
         fragment.let { jsonString += """ "fragment": "$fragment" ,""" }
         progression.let { jsonString += """ "progression": "$progression" ,""" }
         position.let { jsonString += """ "position": "$position" """ }
+        totalProgression.let { jsonString += """ "totalProgression": "$totalProgression" ,""" }
         jsonString += """}"""
         return jsonString
     }

@@ -133,6 +133,12 @@ class Publication : Serializable {
 
     var cssStyle: String? = null
 
+    var totalPageCount: Long? = null
+
+    var positionList: MutableList<Locator> = mutableListOf()
+
+//    var test: MutableList<MutableList<Locator>> = mutableListOf()
+
     val coverLink: Link?
         get() = linkWithRel("cover")
 
